@@ -4,6 +4,7 @@ import model.ChessModel;
 import model.ChessPiece;
 import model.Move;
 import view.View2;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -77,7 +78,7 @@ public class Presenter2 {
 					}
 					view.redrawBoard();
 				} else {
-					view.invalidMessage();
+					view.blinkTimer(move);
 				}
 				state = ActionState.SOURCE;
 				view.gameOver(game.isOver());

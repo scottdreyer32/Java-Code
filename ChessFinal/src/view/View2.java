@@ -15,6 +15,7 @@ import model.Queen;
 import model.Rook;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -255,6 +256,32 @@ public class View2 extends JPanel {
 	public void invalidMessage() {
 		JOptionPane.showMessageDialog(null, "Invalid Move Try Again");
 	}
+	
+	public void blinkTimer(Move move){
+		final Move blinkMove = new Move(move.fromRow,move.fromColumn,move.toRow,move.toColumn);
+		
+		Timer tt = new Timer(200, new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if((blinkMove.fromColumn+blinkMove.fromRow) %2==0){
+        			buttons[blinkMove.fromRow][blinkMove.fromColumn].setBackground(Color.GRAY);
+        		}else{
+        			buttons[blinkMove.fromRow][blinkMove.fromColumn].setBackground(Color.WHITE);
+        		}
+        		if((blinkMove.toRow+blinkMove.toColumn)%2==0){
+        			buttons[blinkMove.toRow][blinkMove.toColumn].setBackground(Color.GRAY);
+        		}else{
+        			buttons[blinkMove.toRow][blinkMove.toColumn].setBackground(Color.WHITE);
+        		}
+        		
+            }
+        });
+        tt.start();
+
+        buttons[blinkMove.fromRow][blinkMove.fromColumn].setBackground(Color.RED);
+        buttons[blinkMove.toRow][blinkMove.toColumn].setBackground(Color.RED);
+        
+    }
+
 
 	public void firstClick(int r, int c) {
 		String message = "First click was " + r + " " + c;

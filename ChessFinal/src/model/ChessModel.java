@@ -177,7 +177,12 @@ public class ChessModel implements IChessModel {
 		
 
 	}
-
+	/**
+	 * Checks to see if the move puts the player in check.
+	 * @param checker the piece that wants to move
+	 * @param mtc the move to check
+	 * @return boolean value of true if the move doesnt put player in check
+	 */
 	public boolean checkMove(IChessPiece checker, Move mtc) {
 
 		IChessPiece temp = gameBoard[mtc.toRow][mtc.toColumn];
@@ -343,7 +348,10 @@ public class ChessModel implements IChessModel {
 		return false;
 
 	}
-
+/**
+ * Determines if the game has ended with a checkmate
+ * @return true if there is a checkmate
+ */
 	public boolean checkMate() {
 		for (int r = 0; r < 8; r++) {
 			for (int c = 0; c < 8; c++) {
@@ -380,7 +388,10 @@ public class ChessModel implements IChessModel {
 		}
 		return true;
 	}
-
+/**
+ * Checks to see if there is a valid rook move available
+ * returns a number >1 if there is a move to be made
+ */
 	public int rookMoves(int r, int c) {
 		// Row down
 		for (int i = r; i < 8; i++) {
@@ -417,7 +428,10 @@ public class ChessModel implements IChessModel {
 
 		return 0;
 	}
-
+	/**
+	 * Checks to see if there is a valid pawn move available
+	 * returns a number >1 if there is a move to be made
+	 */
 	public int pawnMoves(int r, int c) {
 
 		Move move1 = new Move(r, c, r - 1, c);
@@ -506,7 +520,10 @@ public class ChessModel implements IChessModel {
 
 		return 0;
 	}
-
+	/**
+	 * Checks to see if there is a valid bishop move available
+	 * returns a number >1 if there is a move to be made
+	 */
 	public int bishopMoves(int r, int c) {
 		// Down right
 		int dr = c;
@@ -549,7 +566,10 @@ public class ChessModel implements IChessModel {
 
 		return 0;
 	}
-
+	/**
+	 * Checks to see if there is a valid knight move available
+	 * returns a number >1 if there is a move to be made
+	 */
 	public int knightMoves(int r, int c) {
 		Move move1 = new Move(r, c, r - 2, c - 1);
 		Move move2 = new Move(r, c, r - 2, c + 1);
@@ -680,7 +700,10 @@ public class ChessModel implements IChessModel {
 
 		return 0;
 	}
-
+	/**
+	 * Checks to see if there is a valid king move available
+	 * returns a number >1 if there is a move to be made
+	 */
 	public int kingMoves(int r, int c) {
 		Move move1 = new Move(r, c, r + 1, c - 1);
 		Move move2 = new Move(r, c, r + 1, c + 1);
@@ -747,7 +770,10 @@ public class ChessModel implements IChessModel {
 
 		return 0;
 	}
-
+	/**
+	 * Checks to see if there is a valid queen move available
+	 * returns a number >1 if there is a move to be made
+	 */
 	public int queenMoves(int r, int c) {
 		// Row down
 		for (int i = r; i < 8; i++) {
@@ -825,7 +851,10 @@ public class ChessModel implements IChessModel {
 
 	}
 
-	
+	/**
+	 * Checks to see if there is a pawn that should be kinged
+	 * returns true if kinging is available
+	 */
 	public boolean validKingMe() {
 		if (lastMove.toRow == 0
 				&& pieceAt(lastMove.toRow, lastMove.toColumn).name() == "Pawn") {
@@ -836,7 +865,10 @@ public class ChessModel implements IChessModel {
 		} else
 			return false;
 	}
-
+	/**
+	 * Checks to see if the new piece would be valid
+	 * Exchanges the pawn with the new piece
+	 */
 	public void KingMe(IChessPiece iChessPiece) {
 
 		if (lastMove.toRow == 0
@@ -892,7 +924,7 @@ public class ChessModel implements IChessModel {
 		}
 
 	}
-
+//Resets the gameEngine
 	public ChessModel reset() {
 		ChessModel model = new ChessModel();
 		return model;
