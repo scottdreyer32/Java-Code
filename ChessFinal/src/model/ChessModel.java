@@ -2,8 +2,8 @@ package model;
 
 
 /**
- * Created with IntelliJ IDEA. User: Scott Date: 3/18/13 Time: 3:47 PM To change
- * this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. 
+ * User: Scott
  */
 
 public class ChessModel implements IChessModel {
@@ -95,11 +95,8 @@ public class ChessModel implements IChessModel {
 
 	/**
 	 * Returns the piece at the given location
-	 * 
-	 * @param i
-	 *            -the index of the row to check
-	 * @param i2
-	 *            -the index of the column to check
+	 * @param i -the index of the row to check
+	 * @param i2  -the index of the column to check
 	 * @return -Returns the game piece of the location
 	 */
 	public IChessPiece pieceAt(int i, int i2) {
@@ -124,9 +121,7 @@ public class ChessModel implements IChessModel {
 
 	/**
 	 * Checks to see if the move is valid
-	 * 
-	 * @param move
-	 *            -The move that is being checked
+	 * @param move-The move that is being checked
 	 * @return -Boolean value to return(true if valid false otherwise)
 	 */
 	public boolean isValidMove(Move move) {
@@ -223,9 +218,7 @@ public class ChessModel implements IChessModel {
 
 	/**
 	 * Moves the piece to a location and sets from location to null
-	 * 
-	 * @param move
-	 *            -The move being executed
+	 * @param move-The move being executed
 	 */
 	public void move(Move move) {
 		piece = gameBoard[move.fromRow][move.fromColumn];

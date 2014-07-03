@@ -5,9 +5,6 @@ package model;
 /**
  * Created with IntelliJ IDEA.
  * User: Scott
- * Date: 3/7/13
- * Time: 5:33 PM
- * To change this template use File | Settings | File Templates.
  */
 public class King extends ChessPiece {
     public King(Player p) {
@@ -48,6 +45,12 @@ public class King extends ChessPiece {
             return true;
 
     }
+    /**
+     * Checks and validates a castle move from the king
+     * @param move: the move to make
+     * @param iChessPieces: the board to check
+     * @return true if valid castle
+     */
     public boolean castleMove(Move move, IChessPiece[][] iChessPieces){
     	if(move.toColumn==2){
     		Move plusOneCol=new Move(move.fromRow,move.fromColumn,move.toRow,move.toColumn-1);

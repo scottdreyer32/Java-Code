@@ -5,9 +5,6 @@ package model;
 /**
  * Created with IntelliJ IDEA.
  * User: Scott
- * Date: 3/7/13
- * Time: 5:33 PM
- * To change this template use File | Settings | File Templates.
  */
 public class Pawn extends ChessPiece {
     boolean isEnPassant;
@@ -123,6 +120,11 @@ public class Pawn extends ChessPiece {
         }
 
     }
+    /**
+     * Validates an enPassant scenario
+     * @param move-the move to be checked
+     * @returns true if move is valid
+     */
     public boolean enPassant(Move move){
     	Move last = ChessModel.lastMove;
     	int deltaRow = Math.abs(last.toRow - last.fromRow);
@@ -135,6 +137,7 @@ public class Pawn extends ChessPiece {
     			return false;
     		}
      }
+    //Simple getter method for passant variable
     public boolean getPassant(){
     	return isEnPassant;
     }

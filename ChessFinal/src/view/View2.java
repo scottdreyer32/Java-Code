@@ -24,7 +24,7 @@ import java.net.URL;
 
 @SuppressWarnings({ "serial", "unused" })
 public class View2 extends JPanel {
-	// BufferedImage bp,bb,bk,bKi,br,bq,wp,wb,wk,wKi,wr,wq;
+	//Sets up all variables
 	ImageIcon bP, bB, bK, bKI, bR, bQ, wP, wB, wK, wKI, wR, wQ, empty;
 	JButton[][] buttons;
 	ImageIcon lastIcon;
@@ -39,7 +39,7 @@ public class View2 extends JPanel {
 	Move lastMove;
 	private final int rows = 8;
 	private final int columns = 8;
-
+    //Constructor to create and initialize all variables
 	public View2(ChessModel model) {
 		whiteSmoke = new Color(245,245,245);
 		game = model;
@@ -53,27 +53,33 @@ public class View2 extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		turnLabel = new JLabel(WhiteTurn);
 		turnLabel.setFont(new Font("Helvetica",Font.BOLD,18));
-		main = new JPanel();
-		functions = new JPanel();
+		
+		
+		//Create and set up info panel
 		info =new JPanel();
 		info.setLayout(new FlowLayout());
 		info.setBackground(whiteSmoke);
 		info.add(turnLabel);
+		info.setPreferredSize(new Dimension(600, 36));
 		
+		//Create and set up board panel
 		board = new JPanel();
 		board.setLayout(new GridLayout(rows, columns));
 		board.setBorder(BorderFactory.createMatteBorder(20, 20, 20, 20,
 				Color.DARK_GRAY));
+		board.setPreferredSize(new Dimension(600, 600));
+		
+		//Create and set up functions panel
+		functions = new JPanel();
 		functions.setLayout(new FlowLayout());
 		functions.setBackground(whiteSmoke);
-		info.setPreferredSize(new Dimension(600, 36));
-		main.setLayout(new BorderLayout());
-		main.setBorder(BorderFactory.createMatteBorder(0, 36, 0, 36, whiteSmoke));
-
 		functions.add(quitButton);
 		functions.add(resetButton);
 		
-		board.setPreferredSize(new Dimension(600, 600));
+		//Create and set up main panel
+		main = new JPanel();
+		main.setLayout(new BorderLayout());
+		main.setBorder(BorderFactory.createMatteBorder(0, 36, 0, 36, whiteSmoke));
 
 		createImages();
 		setBoard();
@@ -83,11 +89,9 @@ public class View2 extends JPanel {
 		frame.add(main);
 		frame.pack();
 		frame.setVisible(true);
-		
-		System.out.println(""+functions.getSize());
 
 	}
-
+	//Creates Buttons for the board,alternates background color,sets Icons
 	public void setBoard() {
 		
 		for (int r = 0; r < buttons.length; r++) {
@@ -145,7 +149,7 @@ public class View2 extends JPanel {
 		}
 
 	}
-
+	//Sets icons for the pieces
 	public void createImages() {
 		bP = loadIcon("bp.png");
 		bB = loadIcon("bb.png");
@@ -161,11 +165,11 @@ public class View2 extends JPanel {
 		wQ = loadIcon("wq.png");
 		empty = loadIcon("empty.jpg");
 	}
-
+//Adds button listeners to the board
 	public void addButtonListener(int r, int c, ActionListener al) {
 		buttons[r][c].addActionListener(al);
 	}
-
+//Loads the icons and throws exception if unable to load
 	private static ImageIcon loadIcon(String name) {
 		URL imageUrl = View2.class.getResource(name);
 		if (imageUrl == null) {
@@ -173,7 +177,7 @@ public class View2 extends JPanel {
 		}
 		return new ImageIcon(imageUrl);
 	}
-
+//Attaches Icon to new spot
 	public void attachIcon(int r1, int c1, int r2, int c2) {
 		lastMove = new Move(r1, c1, r2, c2);
 		ImageIcon curImage = (ImageIcon) buttons[r1][c1].getIcon();
@@ -186,7 +190,7 @@ public class View2 extends JPanel {
 		buttons[r2][c2].setIcon(curImage);
 		buttons[r1][c1].setIcon(null);
 	}
-
+//Redraws board with the correct icons at each spot
 	public void redrawBoard() {
 		
 		if(game.currentPlayer()==Player.BLACK){
@@ -201,7 +205,7 @@ public class View2 extends JPanel {
 			}
 		}
 	}
-
+//Returns the proper image of the chess piece in param
 	public ImageIcon getImage(IChessPiece thePiece) {
 		if (thePiece == null) {
 			return null;
@@ -235,28 +239,29 @@ public class View2 extends JPanel {
 				return bP;
 		}
 	}
-
+//Resets the board to original state
 	public void reset() {
 		board.removeAll();
 		setBoard();
 	}
-
+//Adds listener to quit button
 	public void addQuitButtonListener(ActionListener quitButtonListener) {
 		quitButton.addActionListener(quitButtonListener);
 	}
-
+	//Adds listener to reset button
 	public void addResetButtonListener(ActionListener resetButtonListener) {
 		resetButton.addActionListener(resetButtonListener);
 	}
-
+//getter method for the last move executed
 	public Move getMove() {
 		return lastMove;
 	}
-
+//Unused didnt want to have to interact with pane everytime a move was invalid
 	public void invalidMessage() {
 		JOptionPane.showMessageDialog(null, "Invalid Move Try Again");
 	}
-	
+//Blinks the two selected spaces on the board red if move is invalid
+//Replaces option pane above
 	public void blinkTimer(Move move){
 		final Move blinkMove = new Move(move.fromRow,move.fromColumn,move.toRow,move.toColumn);
 		
@@ -282,21 +287,21 @@ public class View2 extends JPanel {
         
     }
 
-
+//Method used in testing
 	public void firstClick(int r, int c) {
 		String message = "First click was " + r + " " + c;
 		JOptionPane.showMessageDialog(null, message);
 	}
-
+//Method used in testing
 	public void didItMove() {
 		JOptionPane.showMessageDialog(null, "icon should have moved");
 	}
-
+//Method used in testing
 	public void secondClick(int r, int c) {
 		String message = "Second click was " + r + " " + c;
 		JOptionPane.showMessageDialog(null, message);
 	}
-
+//Displays option pane when a player is in check or the game is won or tied
 	public void gameOver(GameStatus status) {
 		if (status.equals(GameStatus.BLACKINCHECK)) {
 			JOptionPane.showMessageDialog(null, "Black is in check!");
@@ -326,7 +331,7 @@ public class View2 extends JPanel {
 		}
 
 	}
-
+//Method for user to select kinged piece
 	public IChessPiece askUser() {
 		Object[] possibleValues = { "Rook", "Knight", "Bishop", "Queen" };
 		Object selectedValue = JOptionPane.showInputDialog(null, "Choose one",
@@ -344,7 +349,7 @@ public class View2 extends JPanel {
 		} else
 			return null;
 	}
-
+//Sets all buttons enabled
 	public void setAllTrue() {
 		for(int i=0;i<8;i++){
 			for(int k=0;k<8;k++){

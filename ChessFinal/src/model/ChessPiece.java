@@ -25,11 +25,8 @@ public class ChessPiece implements IChessPiece {
 
 	/**
 	 * Validates whether the given move is legal
-	 * 
-	 * @param move
-	 *            -the move to check
-	 * @param iChessPieces
-	 *            -the board on which the move is made
+	 * @param move-the move to check
+	 * @param iChessPieces-the board on which the move is made
 	 * @return -Boolean value of the given move(true if legal, false otherwise)
 	 */
 	@Override
@@ -53,11 +50,8 @@ public class ChessPiece implements IChessPiece {
 
 	/**
 	 * Checks to see if the path of the piece is clear in the row
-	 * 
-	 * @param move
-	 *            -The move that is being checked
-	 * @param iChessPieces
-	 *            -The board on which the piece is moving
+	 * @param move-The move that is being checked
+	 * @param iChessPieces-The board on which the piece is moving
 	 * @return -Boolean value to return(true if valid false otherwise)
 	 */
 	public boolean clearPathRow(Move move, IChessPiece[][] iChessPieces) {
@@ -85,11 +79,8 @@ public class ChessPiece implements IChessPiece {
 
 	/**
 	 * Checks to see if the path of the piece is clear in the column
-	 * 
-	 * @param move
-	 *            -The move that is being checked
-	 * @param iChessPieces
-	 *            -The board on which the piece is moving
+	 * @param move-The move that is being checked
+	 * @param iChessPieces-The board on which the piece is moving
 	 * @return -Boolean value to return(true if valid false otherwise)
 	 */
 	public boolean clearPathCol(Move move, IChessPiece[][] iChessPieces) {
@@ -118,11 +109,8 @@ public class ChessPiece implements IChessPiece {
 
 	/**
 	 * Checks to see if the path of the piece is clear along the diagonal
-	 * 
-	 * @param move
-	 *            -The move that is being checked
-	 * @param iChessPieces
-	 *            -The board on which the piece is moving
+	 * @param move-The move that is being checked
+	 * @param iChessPieces-The board on which the piece is moving
 	 * @return -Boolean value to return(true if valid false otherwise)
 	 */
 	public boolean clearPathDiag(Move move, IChessPiece[][] iChessPieces) {
