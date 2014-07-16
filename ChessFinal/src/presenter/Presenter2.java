@@ -31,13 +31,15 @@ public class Presenter2 {
 		}
 		state = ActionState.SOURCE;
 	}
-	//Sets quitbutton to exit on click
+
+	// Sets quitbutton to exit on click
 	class QuitButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent al) {
 			System.exit(0);
 		}
 	}
-    //Sets reset button to call a new game with the same view
+
+	// Sets reset button to call a new game with the same view
 	class ResetButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent al) {
 			game = new ChessModel();
@@ -47,7 +49,7 @@ public class Presenter2 {
 
 		}
 	}
-   
+
 	class ButtonListener implements ActionListener {
 		int row;
 		int column;
@@ -58,36 +60,45 @@ public class Presenter2 {
 			row = r;
 			column = c;
 		}
-        //Gets source and destination clicks
+
+		// Gets source and destination clicks
 		public void actionPerformed(ActionEvent event) {
 			if (state == ActionState.SOURCE) {
 				fromRow = row;
 				fromCol = column;
+				view.setSelected(row, column);
 				state = ActionState.DESTINATION;
 
 			} else {
 				boolean valid = false;
-				Move move = new Move(fromRow, fromCol, row, column);
-				valid = game.isValidMove(move);
-
-				if (valid == true) {
-					game.move(move);
-					boolean kingMe = game.validKingMe();
-					if (kingMe == true) {
-						game.KingMe(view.askUser());
-					}
-					view.redrawBoard();
+				if (fromRow == row && fromCol == column) {
+					view.deselect(row, column);
 				} else {
-					view.blinkTimer(move);
-				}
-				state = ActionState.SOURCE;
-				view.gameOver(game.isOver());
+					Move move = new Move(fromRow, fromCol, row, column);
+					valid = game.isValidMove(move);
+
+					if (valid == true) {
+						game.move(move);
+						boolean kingMe = game.validKingMe();
+						if (kingMe == true) {
+							game.KingMe(view.askUser());
+						}
+						view.deselect(fromRow, fromCol);
+						view.redrawBoard();
+					} else {
+						view.blinkTimer(move);
+					}
+					
+				}state = ActionState.SOURCE;
+					view.gameOver(game.isOver());
+
 			}
 
 		}
 
 	}
-    //Main method
+
+	// Main method
 	public static void main(String[] args) {
 		ChessModel engine = new ChessModel();
 		View2 view = new View2(engine);

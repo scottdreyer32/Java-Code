@@ -286,6 +286,21 @@ public class View2 extends JPanel {
         buttons[blinkMove.toRow][blinkMove.toColumn].setBackground(Color.RED);
         
     }
+//Sets background color of selected piece
+	public void setSelected(int r,int c){
+		Color background = new Color(240,230,140);
+		buttons[r][c].setBackground(background);
+	}
+//Sets background to normal and deselects button
+	public void deselect(int r,int c){
+		int temp = r+c;
+		if(temp%2==0){
+			buttons[r][c].setBackground(Color.GRAY);
+		}else{
+			buttons[r][c].setBackground(Color.WHITE);
+		}
+		
+	}
 
 //Method used in testing
 	public void firstClick(int r, int c) {
