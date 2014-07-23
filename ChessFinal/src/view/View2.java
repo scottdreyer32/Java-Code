@@ -3,6 +3,7 @@ package view;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 
 import model.Bishop;
 import model.ChessModel;
@@ -289,11 +290,15 @@ public class View2 extends JPanel {
 //Sets background color of selected piece
 	public void setSelected(int r,int c){
 		Color background = new Color(240,230,140);
-		buttons[r][c].setBackground(background);
+		//buttons[r][c].setBackground(background);
+		buttons[r][c].setSelected(true);
+		buttons[r][c].setBorder(new MatteBorder(5,5,5,5,background));
 	}
 //Sets background to normal and deselects button
 	public void deselect(int r,int c){
 		int temp = r+c;
+		buttons[r][c].setSelected(false);
+		buttons[r][c].setBorder(null);
 		if(temp%2==0){
 			buttons[r][c].setBackground(Color.GRAY);
 		}else{

@@ -59,6 +59,7 @@ public class Presenter2 {
 		public ButtonListener(int r, int c) {
 			row = r;
 			column = c;
+
 		}
 
 		// Gets source and destination clicks
@@ -66,15 +67,17 @@ public class Presenter2 {
 			if (state == ActionState.SOURCE) {
 				fromRow = row;
 				fromCol = column;
-				view.setSelected(row, column);
+				view.setSelected(fromRow, fromCol);
 				state = ActionState.DESTINATION;
-
 			} else {
 				boolean valid = false;
-				if (fromRow == row && fromCol == column) {
-					view.deselect(row, column);
+				toRow = row;
+				toCol = column;
+				if (fromRow == toRow && fromCol == toCol) {
+					state = ActionState.SOURCE;
+					view.deselect(fromRow, fromCol);
 				} else {
-					Move move = new Move(fromRow, fromCol, row, column);
+					Move move = new Move(fromRow, fromCol, toRow, toCol);
 					valid = game.isValidMove(move);
 
 					if (valid == true) {
@@ -83,15 +86,15 @@ public class Presenter2 {
 						if (kingMe == true) {
 							game.KingMe(view.askUser());
 						}
-						view.deselect(fromRow, fromCol);
-						view.redrawBoard();
+						
 					} else {
 						view.blinkTimer(move);
 					}
-					
-				}state = ActionState.SOURCE;
-					view.gameOver(game.isOver());
-
+					view.deselect(fromRow, fromCol);
+					state = ActionState.SOURCE;
+				}
+				view.redrawBoard();
+				view.gameOver(game.isOver());
 			}
 
 		}
